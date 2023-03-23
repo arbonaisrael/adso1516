@@ -1,0 +1,14 @@
+// listar credenciales globales
+
+git config --global --list
+
+// configuración de credenciales
+git config --global user.name "usuario"
+git config --global user.password "clave"
+git config --global user.email "correo"
+
+
+// remover configuración de credenciales
+git config --global --remove-section user.name="usuario"
+git config --global --remove-section user.password="clave"
+git config --global --remove-section user.email="correo"
