@@ -12,3 +12,21 @@ git config --global user.email "correo"
 git config --global --remove-section user.name="usuario"
 git config --global --remove-section user.password="clave"
 git config --global --remove-section user.email="correo"
+
+// sincronizar el repositorio en github
+
+git init
+git add . 
+git commit -m 'Inicio del repositorio de adso 15 y 16'
+git remote add origin https://token_personal@github.com/arbonaisrael/adso1516.git
+
+git push -u origin master
+
+
+// Para clonar el repositorio solo se realiza una vez
+git clone https://github.com/arbonaisrael/adso1516.git
+
+
+// Para actualizar 
+git pull origin master
+
