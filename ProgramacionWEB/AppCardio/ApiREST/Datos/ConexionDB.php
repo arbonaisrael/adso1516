@@ -38,17 +38,17 @@
         }
 
         public function obtenerDB() {
-            if (self::$pdo == null) {
+            //if (self::$pdo == null) {
                 self::$pdo = new PDO(
-                    'mysql:dbname = ' . BASE_DE_DATOS .
-                    ';host = ' . NOMBRE_HOST . ';',
+                    'mysql:dbname=' . BASE_DE_DATOS .
+                    ';host=' . NOMBRE_HOST . ';',
                     USUARIO,
                     CONTRASENHA,
-                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAME utf8"));
+                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                     // Habilitamos las excepciones
-                    self::$pdo->setAttribute(PDO::ATTR_ERMODE, PDO::ERRMODE_EXCEPTION);
-            }
+                    self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //}
             return self::$pdo;
         }
 
