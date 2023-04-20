@@ -36,9 +36,45 @@
         private static function Listar($obj) {
 
         }
+
         private static function Registrar($obj) {
-            
+            $usuario = $_POST['datos'];
+
+            $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
+            $validarUsuario = "SELECT usuarios.Usuario, usuarios.Clave, usuarios.Rol, usuarios.Estado FROM usuarios WHERE usuarios.Usuario = '" . $usuario['username'] . "';";
+            $sentenciaValidarUsuario = $pdo->prepare($validarUsuario);
+            if ($sentenciaValidarUsuario->execute()) {
+                $respuestaValidarUsuario = $sentenciaValidarUsuario->fetch( PDO::FETCH_OBJ);
+                if ($respuestaValidarUsuario){
+                    $obj->respuesta = array (
+                        'estado' => 2,
+                        'mensaje' => "El usuario ya esta registrado"
+                    );
+                } else {
+                    $insertUsuario = "INSERT INTO usuarios (usuarios.Usuario, usuarios.Clave, usuarios.Estado, usuarios.Rol) VALUES (?, ?, ?, ?)";
+                    $sentencia = $pdo->prepare( $insertUsuario );
+                    $sentencia->bindParam( 1, $usuario['username'] );
+                    $sentencia->bindParam( 2, $usuario['clave'] );
+                    $sentencia->bindParam( 3, $usuario['estado'] );
+                    $sentencia->bindParam( 4, $usuario['rol'] );
+
+                    $resultado = $sentencia->execute();
+                    if ($resultado) {
+                        $obj->respuesta = array (
+                            'estado' => 1,
+                            'mensaje' => "El usuario ha sido creado exitosamente.."
+                        );
+                    }
+                }
+            } else {
+                $obj->respuesta = array (
+                    'estado' => 2,
+                    'mensaje' => "Error Inesperado."
+                );
+            }
         }
+
+
         private static function Actualizar($obj) {
             
         }
@@ -46,7 +82,7 @@
             $usuario = $_POST['datos'];
             
             $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
-            $sql = "select u.usuario, u.clave, u.rol from usuarios as u where u.usuario = '" . $usuario['username'] . "' and 
+            $sql = "SELECT u.usuario, u.clave, u.rol FROM usuarios as u WHERE u.usuario = '" . $usuario['username'] . "' and 
             u.clave = '" . $usuario['clave'] . "' and u.estado = 1;";
 
             $sentencia = $pdo->prepare($sql);

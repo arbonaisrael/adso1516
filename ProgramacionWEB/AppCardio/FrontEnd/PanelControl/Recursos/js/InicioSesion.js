@@ -17,14 +17,12 @@ $('#IniciarSesion').click(function(e) {
     $.post('../../ApiREST/UsuariosCtrl/Logear',
     {datos: data},
     function (res) {
-        alert('ok');
         if( res.estado == 1 ) {
             alerta  = '<div class="alert alert-success alert-dismissible" role="alert"';
             alerta += '<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>';
             alerta += res.mensaje + '</div>';
-            //sessionStorage.setItem('user',JSON.stringify(res.usuarios));
-            //Recargar('../PanelControl');
-            
+            sessionStorage.setItem('user',JSON.stringify(res.usuarios));
+            Recargar('../PanelControl');
          } else {
             alerta  = '<div class="alert alert-danger alert-dismissible" role="alert"';
             alerta += '<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>';
@@ -36,4 +34,35 @@ $('#IniciarSesion').click(function(e) {
     });
     
 
+});
+
+$('#CrearNuevoUser').click(function(e) {
+    e.preventDefault();
+    if (!($('#nUser').val() == '' || $('#nPass').val() == '')) {
+        alerta = '';
+        data = {
+            username : $('#nUser').val(),
+            clave    : $('#nPass').val(),
+            estado   : $('#nEstado').val(),
+            rol      : $('#nRol').val()    
+        }
+
+        console.log(data);
+        $.post('../../ApiREST/UsuariosCtrl/Registrar',
+        {datos: data},
+        function(res){
+            if( res.estado == 1 ) {
+                alerta  = '<div class="alert alert-success alert-dismissible" role="alert"';
+                alerta += '<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>';
+                alerta += res.mensaje + '</div>';
+             } else {
+                alerta  = '<div class="alert alert-danger alert-dismissible" role="alert"';
+                alerta += '<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>';
+                alerta += res.mensaje + '</div>';
+            }
+            $('#alertass').html('');
+            $('#alertass').append(alerta);            
+        });
+        return false;
+    }
 });
