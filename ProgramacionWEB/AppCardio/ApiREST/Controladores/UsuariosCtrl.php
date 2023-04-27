@@ -34,7 +34,36 @@
         }
 
         private static function Listar($obj) {
+            $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
 
+            $sql = "SELECT 
+                    usuarios.usuario as usuario,
+                    usuarios.clave as clave,
+                    usuarios.rol as rol,
+                    usuarios.estado as estado
+                    FROM
+                    usuarios";
+            
+            $sentencia = $pdo->prepare($sql);
+            if ($sentencia->execute()) {
+                $resultado =  $sentencia->fetchAll( PDO::FETCH_ASSOC );
+                if($resultado) {
+                    $obj->respuesta =array(
+                        'estado' => 1,
+                        "usuarios" => $resultado
+                    );
+                } else {
+                    $obj->respuesta = array (
+                        'estado' => 2,
+                        'mensaje' => "Error Inesperado."
+                    ); 
+                }
+            } else {
+                $obj->respuesta = array (
+                    'estado' => 2,
+                    'mensaje' => "Error Inesperado."
+                );
+            }
         }
 
         private static function Registrar($obj) {

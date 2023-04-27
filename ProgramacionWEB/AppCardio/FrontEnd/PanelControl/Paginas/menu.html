@@ -18,7 +18,7 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a id="ControlPanelUsuarios" href="#usuarios" class="inf">Usuarios</a></li>
+                <li><a id="ControlPanelUsuarios" href="#panelUsuarios" class="inf">Usuarios</a></li>
                 <li><a id="ControlPanelPacientes" href="#pacientes" class="inf">Pacientes</a></li>
 
                 <!--Cerrar sesión-->
@@ -29,4 +29,108 @@
 
 </nav>
 
+<div id="n_img" class="container">
+    <img src="Recursos/img/fondo1.jpg" class="omg-responsive" alt="Cinque Terre">
+</div>
+
+<!---------------------------------------------------------- Usuarios ------------------------------------------------------->
+
+<div id="panelUsuarios" class="container center-block oculto">
+    <div id="alertaUsuarios"></div>
+
+    <h1 class="blue center title">Gestión y Control de Usuarios</h1>
+    <button class="btn btn-primary agregar" id="agregarUsuario">
+        Nuevo Usuario
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>
+
+    <div class="container">
+        <form class="form-horizintal hidden" id="crearUsurio">
+            <div class="form-control">
+                <label for="creaUsuario">Usuario:</label>
+                <input type="text" class="form-control" id="creaUsuario" placeholder="Digitar nombre usuario" required disabled>
+            </div>
+            <div class="form-control">
+                <label for="creaPass">Contraseña:</label>
+                <input type="password" class="form-control" id="creaPass" placeholder="Digitar Contraseña" required>
+            </div>
+            <div class="form-control">
+                <label for="creaRol" class="col-sm-offset-3 col-sm-2 control-label">Rol:</label>
+                <div class="col-sm-4">
+                    <select id="creaRol" class="form-control">
+                        <option value="2">Administrador</option>
+                        <option value="1">Super Administrador</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control">
+                <label for="creaEstado" class="col-sm-offset-3 col-sm-2 control-label">Estado:</label>
+                <div class="col-sm-4">
+                    <select id="creaEstado" class="form-control">
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control">
+                <button type="button" class="btn btn-default" id="cancelarCrearUsuario">Cancelar</button>
+                <button type="submit" class="btn btn-success">Actualizar</button>
+            </div>
+        </form>
+
+        <form class="form-horizintal hidden" id="editarUsurio">
+            <div class="form-control">
+                <label for="editUsuario">Usuario:</label>
+                <input type="text" class="form-control" id="editUsuario" placeholder="Digitar nombre usuario" required disabled>
+            </div>
+            <div class="form-control">
+                <label for="editPass">Contraseña:</label>
+                <input type="password" class="form-control" id="editPass" placeholder="Digitar Contraseña" required>
+            </div>
+            <div class="form-control">
+                <label for="editRol" class="col-sm-offset-3 col-sm-2 control-label">Rol:</label>
+                <div class="col-sm-4">
+                    <select id="editRol" class="form-control">
+                        <option value="2">Administrador</option>
+                        <option value="1">Super Administrador</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control">
+                <label for="editEstado" class="col-sm-offset-3 col-sm-2 control-label">Estado:</label>
+                <div class="col-sm-4">
+                    <select id="editEstado" class="form-control">
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control">
+                <button type="button" class="btn btn-default" id="cancelarActualizarUsuario">Cancelar</button>
+                <button type="submit" class="btn btn-success">Actualizar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table id="usuarioTable" class="table table-hover">
+            <thead>
+                <tr class="blue">
+                    <td>Usuario</td>
+                    <td>Rol</td>
+                    <td>Estado</td>
+                    <td>Editar</td>
+                </tr>
+            </thead>
+            <tbody id="tUsers">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!---------------------------------------------------------- Usuarios ------------------------------------------------------->
+
+
 <script src="Recursos/js/PanelControl.js"></script>
+<script src="Recursos/js/PanelControlUsuarios.js"></script>
