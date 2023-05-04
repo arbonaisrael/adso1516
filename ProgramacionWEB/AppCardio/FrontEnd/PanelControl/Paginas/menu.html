@@ -45,16 +45,21 @@
     </button>
 
     <div class="container">
-        <form class="form-horizintal hidden" id="crearUsurio">
-            <div class="form-control">
-                <label for="creaUsuario">Usuario:</label>
-                <input type="text" class="form-control" id="creaUsuario" placeholder="Digitar nombre usuario" required disabled>
+        <form class="form-horizontal hidden" id="crearUsuario">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <label for="creaUsuario">Usuario:</label>
+                    <input type="text" class="form-control" id="creaUsuario" placeholder="Digitar nombre usuario" required>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="creaPass">Contraseña:</label>
-                <input type="password" class="form-control" id="creaPass" placeholder="Digitar Contraseña" required>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <label for="creaPass">Contraseña:</label>
+                    <input type="password" class="form-control" id="creaPass" placeholder="Digitar Contraseña" required>
+                </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <label for="creaRol" class="col-sm-offset-3 col-sm-2 control-label">Rol:</label>
                 <div class="col-sm-4">
                     <select id="creaRol" class="form-control">
@@ -63,7 +68,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <label for="creaEstado" class="col-sm-offset-3 col-sm-2 control-label">Estado:</label>
                 <div class="col-sm-4">
                     <select id="creaEstado" class="form-control">
@@ -72,22 +77,30 @@
                     </select>
                 </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <button type="button" class="btn btn-default" id="cancelarCrearUsuario">Cancelar</button>
                 <button type="submit" class="btn btn-success">Actualizar</button>
             </div>
         </form>
 
-        <form class="form-horizintal hidden" id="editarUsurio">
-            <div class="form-control">
-                <label for="editUsuario">Usuario:</label>
-                <input type="text" class="form-control" id="editUsuario" placeholder="Digitar nombre usuario" required disabled>
+
+
+
+        <form class="form-horizontal hidden" id="editarUsuario">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <label for="editUsuario">Usuario:</label>
+                    <input type="text" class="form-control" id="editUsuario" placeholder="Digitar nombre usuario" required
+                        disabled>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="editPass">Contraseña:</label>
-                <input type="password" class="form-control" id="editPass" placeholder="Digitar Contraseña" required>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <label for="editPass">Contraseña:</label>
+                    <input type="password" class="form-control" id="editPass" placeholder="Digitar Contraseña" required>
+                </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <label for="editRol" class="col-sm-offset-3 col-sm-2 control-label">Rol:</label>
                 <div class="col-sm-4">
                     <select id="editRol" class="form-control">
@@ -96,7 +109,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <label for="editEstado" class="col-sm-offset-3 col-sm-2 control-label">Estado:</label>
                 <div class="col-sm-4">
                     <select id="editEstado" class="form-control">
@@ -105,7 +118,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-control">
+            <div class="form-group">
                 <button type="button" class="btn btn-default" id="cancelarActualizarUsuario">Cancelar</button>
                 <button type="submit" class="btn btn-success">Actualizar</button>
             </div>

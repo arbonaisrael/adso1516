@@ -70,7 +70,16 @@
             $usuario = $_POST['datos'];
 
             $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
-            $validarUsuario = "SELECT usuarios.Usuario, usuarios.Clave, usuarios.Rol, usuarios.Estado FROM usuarios WHERE usuarios.Usuario = '" . $usuario['username'] . "';";
+            $validarUsuario = "SELECT 
+                               usuarios.Usuario, 
+                               usuarios.Clave, 
+                               usuarios.Rol, 
+                               usuarios.Estado 
+                               FROM 
+                               usuarios 
+                               WHERE 
+                               usuarios.Usuario = '" . $usuario['username'] . "';";
+
             $sentenciaValidarUsuario = $pdo->prepare($validarUsuario);
             if ($sentenciaValidarUsuario->execute()) {
                 $respuestaValidarUsuario = $sentenciaValidarUsuario->fetch( PDO::FETCH_OBJ);
@@ -80,7 +89,10 @@
                         'mensaje' => "El usuario ya esta registrado"
                     );
                 } else {
-                    $insertUsuario = "INSERT INTO usuarios (usuarios.Usuario, usuarios.Clave, usuarios.Estado, usuarios.Rol) VALUES (?, ?, ?, ?)";
+                    $insertUsuario = "INSERT INTO 
+                                      usuarios (usuarios.Usuario, usuarios.Clave, usuarios.Estado, usuarios.Rol) 
+                                      VALUES (?, ?, ?, ?)";
+
                     $sentencia = $pdo->prepare( $insertUsuario );
                     $sentencia->bindParam( 1, $usuario['username'] );
                     $sentencia->bindParam( 2, $usuario['clave'] );
@@ -105,14 +117,52 @@
 
 
         private static function Actualizar($obj) {
+            $usuario = $_POST['datos'];
+            $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
             
+            $sqlUpdate = "UPDATE 
+                          usuarios 
+                          SET 
+                          usuarios.Clave = ?, 
+                          usuarios.Estado = ?, 
+                          usuarios.Rol = ? 
+                          WHERE 
+                          usuarios.Usuario = ?";
+
+            $sentencia = $pdo->prepare( $sqlUpdate );
+            $sentencia->bindParam( 1, $usuario['clave'] );
+            $sentencia->bindParam( 2, $usuario['estado'] );
+            $sentencia->bindParam( 3, $usuario['rol'] );
+            $sentencia->bindParam( 4, $usuario['username'] );
+
+            $resultado = $sentencia->execute();
+
+            if($resultado) {
+                $obj->respuesta = array (
+                    'estado' => 1,
+                    'mensaje' => "El usuario ha sido actualizado exitosamente.."
+                );    
+            } else {
+                $obj->respuesta = array (
+                    'estado' => 2,
+                    'mensaje' => "Error Inesperado."
+                );
+            }
         }
+
         private static function Logear($obj) {
             $usuario = $_POST['datos'];
             
             $pdo = ConexionDB::obtenerInstancia()->obtenerDB();
-            $sql = "SELECT u.usuario, u.clave, u.rol FROM usuarios as u WHERE u.usuario = '" . $usuario['username'] . "' and 
-            u.clave = '" . $usuario['clave'] . "' and u.estado = 1;";
+            $sql = "SELECT 
+                    u.usuario, 
+                    u.clave, 
+                    u.rol 
+                    FROM 
+                    usuarios as u 
+                    WHERE 
+                    u.usuario = '" . $usuario['username'] . "' and 
+                    u.clave = '" . $usuario['clave'] . "' and u.estado = 1;";
 
             $sentencia = $pdo->prepare($sql);
 
