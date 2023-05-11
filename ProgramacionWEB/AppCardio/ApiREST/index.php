@@ -5,6 +5,8 @@
     */
 
     require_once 'Controladores/UsuariosCtrl.php';
+    require_once 'Controladores/BarriosCtrl.php';
+    require_once 'Controladores/CiudadesCtrl.php';    
 
 
     header ( 'content-type: application/json; charset=utf-8' );
@@ -19,7 +21,9 @@
         $recurso = array_shift($peticion); // Obtener el recurso a solicitar
         
         $recursosExistentes = array (
-            'UsuariosCtrl'
+            'UsuariosCtrl',
+            'BarriosCtrl',
+            'CiudadesCtrl'
         ); // Definimos los recursos existentes y validamos que la solicitud exista
 
         if (in_array($recurso,$recursosExistentes)) {
@@ -31,6 +35,12 @@
                 switch ($recurso) {
                     case 'UsuariosCtrl' :
                         $instancia = new UsuariosCtrl($peticion);
+                        break;
+                    case 'BarriosCtrl' :
+                        $instancia = new BarriosCtrl($peticion);
+                        break;
+                    case 'CiudadesCtrl' :
+                        $instancia = new CiudadesCtrl($peticion);
                         break;
                 }
 
